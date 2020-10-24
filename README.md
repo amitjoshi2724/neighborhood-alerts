@@ -23,4 +23,4 @@ This app is published to the App Store by MyWikis LLC. By making changes to this
 
 ## Credits
 
-Original code contributions by Jeffrey Wang (@jeffw16) and Amit Joshi (@amit56), with additional contributions by Gunjan Bhattarai (@Gunjan-Bhattarai). This app was developed as the final project for UT Austin's CS 371L iOS Mobile Computing class in Summer 2020.
+Original code contributions by Jeffrey Wang (@jeffw16) and Amit Joshi (@amitjoshi24), with additional contributions by Gunjan Bhattarai (@Gunjan-Bhattarai). This app was developed as the final project for UT Austin's CS 371L iOS Mobile Computing class in Summer 2020.
