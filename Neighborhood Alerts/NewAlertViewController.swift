@@ -70,7 +70,67 @@ class NewAlertViewController: UIViewController, UINavigationControllerDelegate, 
     
     
     @IBAction func selectLocation(_ sender: Any) {
+        // check if location services is enabled
+        checkLocationServices()
+        
+        if let location = locationManager.location {
+            // pinpoint where the map is centered around
+            let currentCoordinate = location.coordinate
+            self.pickedLocation = GeoPoint(latitude: currentCoordinate.latitude, longitude: currentCoordinate.longitude)
+        } else {
+            // UT Austin
+            self.pickedLocation = GeoPoint(latitude: 30.288672, longitude: -97.739765)
+        }
         self.performSegue(withIdentifier: locationPickerSegueIdentifier, sender: self)
+    }
+    
+    // MARK: - Location service handlers
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            checkLocationAuthorization()
+        } else {
+            // Show alert letting the user know they have to turn this on.
+            let alertController = UIAlertController(
+                title: "Location services off",
+                message: "In order to use Neighborhood Alerts, you need to turn location services on in Settings.",
+                preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    // alert the user if location authorization isn't what we wanted
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .restricted: // Show an alert letting them know what’s up
+            let alertController = UIAlertController(
+                title: "Location services off",
+                message: "In order to use Neighborhood Alerts, you need to turn location services on in Settings.",
+                preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil))
+            present(alertController, animated: true, completion: nil)
+        case .denied: // Show alert telling users how to turn on permissions
+            let alertController = UIAlertController(
+                title: "Location services off",
+                message: "In order to use Neighborhood Alerts, you need to turn location services on in Settings.",
+                preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil))
+            present(alertController, animated: true, completion: nil)
+        case .notDetermined: break
+        case .authorizedAlways: break
+        case .authorizedWhenInUse: break
+        @unknown default:
+            fatalError()
+        }
     }
     
     
